@@ -40,8 +40,9 @@
 	function fillTables (){
 	  $.get("/api/tables", function(data) {
         console.log(data);
-
-        for (var i = 0; i < data.length; i++) 
+        data.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
+        
+        for (var i = 0; i < 5; i++) 
         {
           $("#topFive").append("<tr><td>" + data[i].title + "</td>" + "<td>" + data[i].rating + "</td></tr>");
     }

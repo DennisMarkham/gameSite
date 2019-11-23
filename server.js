@@ -39,7 +39,7 @@ connection.connect(function(err){
 });
 
 function fillT5() {
-  connection.query("SELECT * FROM games ORDER BY rating DESC;", function(err, result) {
+  connection.query("SELECT * FROM games;", function(err, result) {
     if (err) throw err;
     
     console.log(result);
@@ -47,10 +47,11 @@ function fillT5() {
     var i;
    
 
-    for (i = 0; i < 5; i++) { 
-  console.log(i + 1 + ") " + result[i]);
+    for (i = 0; i < result.length; i++) { 
   gamesArray.push(result[i]);
 }
+
+console.log(gamesArray);
 
 app.get("/api/tables", function(req, res) {
   return res.json(gamesArray);
@@ -61,7 +62,7 @@ app.get("/api/tables", function(req, res) {
   });
 }
 
-connection.end();
+// connection.end();
 
 
 
