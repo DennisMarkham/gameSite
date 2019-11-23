@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang ="en-us">
+<head>
+
+<meta charset="UTF-8">
+  <title>DGN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="https://code.jquery.com/jquery.js"></script>
+<style>
+	table{
+		border-style: solid;
+		border-width: 2px;
+		padding:0px;
+	}
+
+	th, header{
+		background: red;
+	}
+
+	header
+	{
+		padding: 20px;
+		font-size: 24px;
+		text-align: center;
+		margin-bottom: 10px;
+		font-style: bold;
+	}
+
+	
+</style>
+</head>
+<body onload = "fillTables()">
+<header>jaljflak</header>
+	<table id = "topFive">
+	<th>Top 5 games</th>
+	</table>
+
+<script>
+
+	function fillTables (){
+	  $.get("/api/tables", function(data) {
+        console.log(data);
+
+        for (var i = 0; i < data.length; i++) 
+        {
+          $("#topFive").append("<tr><td>" + data[i].title + "</td>" + "<td>" + data[i].rating + "</td></tr>");
+    }
+      });
+
+	}
+</script>
+	</body>
+</html>
