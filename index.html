@@ -6,11 +6,14 @@
   <title>DGN</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="https://code.jquery.com/jquery.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
 	table{
 		border-style: solid;
 		border-width: 2px;
-		padding:0px;
+		margin: 20px;
+	
 	}
 
 	th, header{
@@ -19,6 +22,8 @@
 
 	header
 	{
+		position: fixed;
+		width:100%;
 		padding: 20px;
 		font-size: 24px;
 		text-align: center;
@@ -26,27 +31,54 @@
 		font-style: bold;
 	}
 
+
+.mainRating
+{
+	float: right;
+	padding: 20px;
+	background-color:red;
+	display: inline;
+}
 	
 </style>
 </head>
 <body onload = "fillTables()">
 <header>jaljflak</header>
+
+<div class = "row">
+	<div class "col-md-2">
 	<table id = "topFive">
 	<th>Top 5 games</th>
 	</table>
+</div>
 
+<div class = "col-md-10">
+	<div id = "main"></div>
+</div>
+
+</div>
 <script>
 
 	function fillTables (){
 	  $.get("/api/tables", function(data) {
         console.log(data);
+
+        for (var i = 0; i < data.length; i++) 
+        {
+          $("#main").append("<p style = 'font-size: 24px'>" + data[i].title + "</p>" + data[i].rel.substring(0, 10) + " " + "<span class = 'mainRating'>" + data[i].rating + "</span>" + "<hr>");
+    }
+
         data.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
         
         for (var i = 0; i < 5; i++) 
         {
           $("#topFive").append("<tr><td>" + data[i].title + "</td>" + "<td>" + data[i].rating + "</td></tr>");
     }
+
+
+
       });
+
 
 	}
 </script>

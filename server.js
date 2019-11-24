@@ -39,7 +39,7 @@ connection.connect(function(err){
 });
 
 function fillT5() {
-  connection.query("SELECT * FROM games;", function(err, result) {
+  connection.query("SELECT * FROM games ORDER BY rel DESC;", function(err, result) {
     if (err) throw err;
     
     console.log(result);
